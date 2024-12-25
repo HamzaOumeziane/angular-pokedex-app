@@ -1,4 +1,6 @@
 import { Component, signal, computed, effect } from '@angular/core';
+import { POKEMON_LIST } from './pokemon-list.fake';
+import { Pokemon } from './pokemon.model';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,39 @@ import { Component, signal, computed, effect } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  name = signal('Pikachu');
+  pokemonList = signal(POKEMON_LIST);
+
+  size(pokemon: Pokemon){
+    if (pokemon.life <= 15) {
+      return 'Petit';
+    }
+    else if (pokemon.life < 25) {
+      return 'Moyen';
+    }
+    else {
+      return 'Grand';
+    }
+  }
+
+  incrementLife(pokemon: Pokemon){
+    pokemon.life += 1;
+  }
+
+  decrementLife(pokemon: Pokemon){
+    pokemon.life -= 1;
+    
+  }
+}
+
+  /*name = signal('Pikachu');
   life = signal(23);
+  imageUrl = signal('images/pikachu-png-transparent-0.png');
+  imageShown = signal(true);
+  
+  imageTextButton = computed(() => {
+    return this.imageShown()? 'Masquer l\'image' : 'Afficher l\'image';
+  })
+  
   size = computed(() => {
     if (this.life() <= 15) {
       return 'Petit';
@@ -22,6 +55,7 @@ export class AppComponent {
     }
   })
 
+
   constructor(){
     effect(() => {
       console.log('Le compteur a été mis à jour :', this.life());
@@ -29,15 +63,10 @@ export class AppComponent {
 
   }
 
-  incrementLife(){
-    this.life.update(value => value + 1);
-  }
+  
 
-  decrementLife(){
-    this.life.update(value => value - 1);
+  changeImage(){
+    this.imageShown.update(value => !value);
   }
-
-  comebackZero(){
-    this.life.set(0);
-  }
-}
+  
+  */
