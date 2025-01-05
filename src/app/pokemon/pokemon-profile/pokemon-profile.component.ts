@@ -1,5 +1,4 @@
 import { Component, signal, inject } from '@angular/core';
-import { POKEMON_LIST } from '../../../fake-database/pokemon-list.fake';
 import { PokemonService } from '../pokemon-services/pokemon.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';

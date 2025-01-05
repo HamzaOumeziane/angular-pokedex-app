@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { POKEMON_LIST } from '../../fake-database/pokemon-list.fake';
 import { RouterLink } from '@angular/router';
+import { PokemonService } from '../pokemon/pokemon-services/pokemon.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -10,5 +11,6 @@ import { RouterLink } from '@angular/router';
 })
 export class PageNotFoundComponent {
   random = Math.floor(Math.random() * POKEMON_LIST.length);
-  unPokemon = signal(POKEMON_LIST[this.random])
+  pokemonService = inject(PokemonService)
+  unPokemon = signal(this.pokemonService.getPokemon(this.random));
 }
