@@ -6,7 +6,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 
 @Component({
   selector: 'app-pokemon-edit',
-  imports: [DatePipe, RouterLink, ReactiveFormsModule],
+  imports: [DatePipe, RouterLink, ReactiveFormsModule, JsonPipe],
   templateUrl: './pokemon-edit.component.html',
   styles: ``
 })
