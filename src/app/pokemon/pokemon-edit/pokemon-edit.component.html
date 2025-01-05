@@ -6,7 +6,7 @@
             </div>
 
             <div class="col-md-8">
-                <form [formGroup]="form">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="card-body">
                         <h2 class="card-title">
                             {{ pokemon().name }}
@@ -50,8 +50,9 @@
                                     <th scope="row">Types</th>
                                     <td>
                                         @for(type of pokemonTypeList.controls; track type; let index = $index){
-                                            <button type="button" class="btn btn-secondary btn-sm rounded-pill m-1" (click)="pokemonTypeList.removeAt(index)">
-                                                {{type.value}} <span class="badge">x</span>
+                                            <button #backgroundColor type="button" class="btn btn-sm rounded-pill m-1" (click)="pokemonTypeList.removeAt(index)" 
+                                            [style.backgroundColor]="getBorderColor(type.value)" [style.color] ="getColorText(type.value)" style="border: 0.5px solid black;">
+                                                {{type.value}} <span class="badge" [style.color] ="getColorText(type.value)">x</span>
                                             </button>
                                         }
 
@@ -82,5 +83,3 @@
         </div>
     </div>
 </div>
-
-<pre>{{form.value | json}}</pre>

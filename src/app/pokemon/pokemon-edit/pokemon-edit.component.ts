@@ -3,6 +3,7 @@ import { PokemonService } from '../pokemon-services/pokemon.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { getBorderColor } from '../../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-edit',
@@ -15,6 +16,13 @@ export class PokemonEditComponent {
   route = inject(ActivatedRoute);
   pokemonId = Number(this.route.snapshot.paramMap.get('id'));
   pokemon = signal(this.pokemonService.getPokemon(this.pokemonId)).asReadonly();
+
+  getBorderColor = getBorderColor;
+
+  getColorText(type: string): string {
+    return type === 'Electrik' ? 'black' : 'white';
+
+  }
 
   readonly form = new FormGroup({
     name: new FormControl(this.pokemon().name),
@@ -43,5 +51,7 @@ export class PokemonEditComponent {
     }
   }
 
-
+  onSubmit(): void {
+    console.log(this.form.value)
+  }
 }
