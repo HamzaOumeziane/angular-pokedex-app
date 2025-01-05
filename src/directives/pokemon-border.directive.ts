@@ -30,6 +30,7 @@ export class PokemonBorderDirective {
 
   getBorderColor(): string {
     switch (this.pokemonType()) {
+      
       case 'Feu':
         return '#EF5350';
       case 'Eau':
