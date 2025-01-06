@@ -37,14 +37,4 @@ export class PokemonListComponent {
       return 'Grand';
     }
   }
-
-  incrementLife(pokemon: Pokemon){
-    pokemon.life += 1;
-  }
-
-  decrementLife(pokemon: Pokemon){
-    pokemon.life -= 1;
-    
-  }
-
 }

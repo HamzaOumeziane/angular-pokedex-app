@@ -13,6 +13,7 @@ export class PokemonBorderDirective {
   constructor(private el: ElementRef) { 
     this.initialColor = this.el.nativeElement.style.borderColor;
     this.el.nativeElement.style.borderWidth = '2px';
+    this.el.nativeElement.style.cursor = 'pointer';
   }
 
   private setBorder(color: string){
