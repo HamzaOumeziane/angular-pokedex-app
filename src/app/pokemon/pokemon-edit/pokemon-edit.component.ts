@@ -2,8 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { PokemonService } from '../pokemon-services/pokemon.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe, JsonPipe } from '@angular/common';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { getBorderColor } from '../../../models/pokemon.model';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { getBorderColor, POKEMON_RULES } from '../../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-edit',
@@ -25,7 +25,12 @@ export class PokemonEditComponent {
   }
 
   readonly form = new FormGroup({
-    name: new FormControl(this.pokemon().name),
+    name: new FormControl(this.pokemon().name, [
+      Validators.required, 
+      Validators.minLength(POKEMON_RULES.MIN_NAME),
+      Validators.maxLength(POKEMON_RULES.MAX_NAME),
+      Validators.pattern(POKEMON_RULES.NAME_PATTERN)
+    ]),
     life: new FormControl(this.pokemon().life),
     damage: new FormControl(this.pokemon().damage),
     types: new FormArray(
@@ -35,6 +40,10 @@ export class PokemonEditComponent {
 
   get pokemonTypeList(): FormArray {
     return this.form.get('types') as FormArray;
+  }
+
+  get pokemonName(){
+    return this.form.get('name') as FormControl;
   }
 
   isPokemonTypeSelected(type: string): boolean {
